@@ -9,8 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import edu.tienda.core.domain.Customer;
+import edu.tienda.core.exceptions.ResourceNotFoundException;
+import edu.tienda.core.exceptions.BadRequestException;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,8 +20,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+
+
 
 
 
@@ -41,9 +42,15 @@ public class CustomerRestController {
 
     @GetMapping("/{username}")
     public ResponseEntity<?> getCustomer(@PathVariable String username){
+       if(username.length() !=3){
+        throw new BadRequestException("El parametro nombre de usuario debe contener 3 caracteres");
+       }
+        
        return ResponseEntity.ok(customerList.stream().
        filter(customer -> customer.getUsername().equalsIgnoreCase(username)).
-       findFirst().orElseThrow()); 
+       findFirst()
+       .map(ResponseEntity::ok)
+       .orElseThrow(() -> new ResourceNotFoundException("Cliente " + username + " no encontrado."))); 
     }
 
     @PostMapping
@@ -71,7 +78,7 @@ public class CustomerRestController {
     }
 
     @DeleteMapping("/{username}")
-    public ResponseEntity deleteCustomer(@PathVariable String username){
+    public ResponseEntity<?> deleteCustomer(@PathVariable String username){
         Customer foundCustomer = customerList.stream().
             filter(cus -> cus.getUsername().equalsIgnoreCase(username)).
             findFirst().orElseThrow();  
