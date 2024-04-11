@@ -3,13 +3,13 @@ package edu.tienda.core.controllers;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
 
 
 @RestController
 public class ClientRenderController {
 
-    @GetMapping(value = "/clientes.html", produces = MediaType.TEXT_HTML_VALUE)
+    @GetMapping(value = "/clientes-html", produces = MediaType.TEXT_HTML_VALUE)
     public String getClienteAsHtml() {
         StringBuilder sb = new StringBuilder();
         sb.append("<!DOCTYPE html><html lang=\"en\"><head>");
@@ -26,7 +26,7 @@ public class ClientRenderController {
         return sb.toString();
     }
      
-    @GetMapping(value = "/clientes.xml", produces = MediaType.APPLICATION_XML_VALUE)
+    @GetMapping(value = "/clientes-xml", produces = MediaType.APPLICATION_XML_VALUE)
     public String getClienteAsXml() {
         StringBuilder sb = new StringBuilder();
         sb.append("<?xml version='1.0' encoding='UTF-8'> \n")
