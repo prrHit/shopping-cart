@@ -3,11 +3,9 @@ package edu.tienda.core.controllers;
 import org.springframework.web.bind.annotation.RestController;
 
 import edu.tienda.core.domain.Product;
-import edu.tienda.core.services.ProductsServiceImpl;
 import edu.tienda.core.services.ProductsService;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+
 
 import java.util.List;
 
