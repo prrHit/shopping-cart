@@ -21,6 +21,7 @@ public class ProductRestController {
 
     //Se instancia la clase de servicio al esilo "Java puro"
     @Autowired
+
     private ProductsService productsService; 
     @GetMapping
     public ResponseEntity<?> getProducts(){

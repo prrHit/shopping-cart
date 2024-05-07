@@ -5,9 +5,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
 
-    @Service
+    @Service("MEMORY")
+    @ConditionalOnProperty(
+        value="products.strategy",
+        havingValue="IN_MEMORY"
+    )
     public class ProductsServiceImpl implements ProductsService {
         private List<Product> products = new ArrayList<>(Arrays.asList(
             new Product(1, "Smart TV", 9000.0, 3),
