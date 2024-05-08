@@ -6,8 +6,9 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
-
+    @Lazy
     @Service("MEMORY")
     @ConditionalOnProperty(
         value="products.strategy",
@@ -24,6 +25,8 @@ import org.springframework.stereotype.Service;
             return products;
         }
 
-        
+    public ProductsServiceImpl(){
+        System.out.println("Se esta construyendo un objeto de la clase ProductsServiceImpl");
+    }    
 
 }
