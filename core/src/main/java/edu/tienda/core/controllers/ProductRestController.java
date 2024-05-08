@@ -2,6 +2,7 @@ package edu.tienda.core.controllers;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import edu.tienda.core.configurations.ConfigurationsParameters;
 import edu.tienda.core.domain.Product;
 import edu.tienda.core.services.ProductsService;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,8 +25,14 @@ public class ProductRestController {
     @Autowired
     @Lazy
     private ProductsService productsService; 
+
+    @Autowired
+    private ConfigurationsParameters configurations;
+
     @GetMapping
     public ResponseEntity<?> getProducts(){
+        // parameters
+        System.out.println("params: " + configurations.toString());
 
         // Bring all the products from the service
         List<Product> products = productsService.getProducts();
